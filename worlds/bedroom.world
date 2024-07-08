@@ -1,0 +1,360 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Define walls with different colors -->
+    <model name="wall_north">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 0.1 2.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 0.1 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient> <!-- Red -->
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>0 5 1.25 0 0 0</pose> <!-- Position in the world -->
+    </model>
+
+    <model name="wall_south">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 0.1 2.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 0.1 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 1 0 1</ambient> <!-- Green -->
+            <diffuse>0 1 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>0 -5 1.25 0 0 0</pose>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 10 2.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 10 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient> <!-- Blue -->
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>5 0 1.25 0 0 0</pose>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.1 10 2.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.1 10 2.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 1 0 1</ambient> <!-- Yellow -->
+            <diffuse>1 1 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>-5 0 1.25 0 0 0</pose>
+    </model>
+
+    <!-- Bed pushed back against the wall -->
+    <include>
+      <uri>model://bed</uri>
+      <pose>-1.25 -4.8 0.25 0 0 1.5708</pose> <!-- Position the bed against the wall and facing the TV -->
+    </include>
+
+    <!-- Nightstand beside the bed -->
+    <model name="nightstand">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0.3 0.1 1</ambient>
+            <diffuse>0.5 0.3 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>-2.75 -4.8 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
+    </model>
+
+    <!-- Lamp on the nightstand -->
+    <model name="lamp">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.3</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.3</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>-2.75 -4.8 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
+    </model>
+
+    <!-- Rug covering the whole floor -->
+    <model name="rug">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 10 0.01</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 10 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.7 0.6 1</ambient>
+            <diffuse>0.8 0.7 0.6 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>0 0 0 0 0 0</pose> <!-- Position the rug covering the whole floor -->
+    </model>
+
+    <!-- Bookshelf -->
+    <model name="bookshelf">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 0.3 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 0.3 2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4 0.2 0.1 1</ambient>
+            <diffuse>0.4 0.2 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>4 4 1 0 0 0</pose> <!-- Position the bookshelf in the corner -->
+    </model>
+
+    <!-- Desk and Chair -->
+    <include>
+      <uri>model://desk</uri>
+      <pose>2 -4 0.25 0 0 0</pose> <!-- Position the desk -->
+    </include>
+    <include>
+      <uri>model://chair</uri>
+      <pose>2 -3.5 0.25 0 0 0</pose> <!-- Position the chair -->
+    </include>
+
+    <!-- Wardrobe -->
+    <model name="wardrobe">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.5 0.6 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.5 0.6 2</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.4 0.2 1</ambient>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>-4 -4 1 0 0 0</pose> <!-- Position the wardrobe in another corner -->
+    </model>
+
+    <!-- Window on the wall -->
+    <model name="window">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2 0.1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2 0.1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 1 0.5</ambient>
+            <diffuse>0.5 0.5 1 0.5</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>0 5 1.5 0 0 0</pose> <!-- Position the window on the north wall -->
+    </model>
+
+    <!-- TV on top of the bench -->
+    <model name="tv_on_bench">
+      <static>true</static>
+      <link name="bench_link">
+        <collision name="bench_collision">
+          <geometry>
+            <box>
+              <size>2 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="bench_visual">
+          <geometry>
+            <box>
+              <size>2 0.5 0.5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.2 0.1 1</ambient>
+            <diffuse>0.3 0.2 0.1 1</diffuse>
+          </material>
+        </visual>
+        <pose>0 2 0.25 0 0 0</pose> <!-- Position the bench -->
+      </link>
+      <link name="tv_link">
+        <collision name="tv_collision">
+          <geometry>
+            <box>
+              <size>1.2 0.2 0.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="tv_visual">
+          <geometry>
+            <box>
+              <size>1.2 0.2 0.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.1 0.1 0.1 1</ambient>
+            <diffuse>0.1 0.1 0.1 1</diffuse>
+          </material>
+        </visual>
+        <pose>0 2 0.85 0 0 0</pose> <!-- Position the TV just above the bench -->
+      </link>
+    </model>
+
+    <!-- Sound System next to the TV -->
+    <model name="sound_system">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.3 0.3 0.3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.3 0.3 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <pose>0.75 2 0.25 0 0 0</pose> <!-- Position the sound system next to the TV -->
+    </model>
+
+  </world>
+</sdf>
