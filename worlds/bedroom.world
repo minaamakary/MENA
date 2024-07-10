@@ -112,7 +112,7 @@
     <!-- Bed pushed back against the wall -->
     <include>
       <uri>model://bed</uri>
-      <pose>--1.874219 -3.557249 0.250000 0 0 1.570799</pose> <!-- Position the bed against the wall and facing the TV -->
+      <pose>-2 -4.8 0.25 0 0 1.5708</pose> <!-- Position the bed against the wall and facing the TV -->
     </include>
 
     <!-- Nightstand beside the bed -->
@@ -138,7 +138,7 @@
           </material>
         </visual>
       </link>
-      <pose>-3.75 -4.6 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
+      <pose>-3.75 -4.8 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
     </model>
 
     <!-- Lamp on the nightstand -->
@@ -166,7 +166,7 @@
           </material>
         </visual>
       </link>
-      <pose>-3.75 -4.6 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
+      <pose>-3.75 -4.8 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
     </model>
 
     <!-- Rug covering the whole floor -->
@@ -254,10 +254,10 @@
           </material>
         </visual>
       </link>
-      <pose>-4 -4 1 0 0 0</pose> <!-- Position the wardrobe in another corner -->
+      <pose>-4 4 1 0 0 0</pose> <!-- Position the wardrobe in the corner -->
     </model>
 
-    <!-- Window on the wall -->
+    <!-- Window -->
     <model name="window">
       <static>true</static>
       <link name="link">
@@ -353,7 +353,48 @@
           </material>
         </visual>
       </link>
-      <pose>1 2 0.25 0 0 0</pose> <!-- Position the sound system next to the TV -->
+      <pose>0.75 2 0.25 0 0 0</pose> <!-- Position the sound system next to the TV -->
+    </model>
+
+    <!-- LiDAR Sensor in the center of the room -->
+    <model name="lidar_sensor">
+      <static>true</static>
+      <link name="link">
+        <sensor name="lidar" type="ray">
+          <pose>0 0 1 0 0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>640</samples>
+                <resolution>1</resolution>
+                <min_angle>-3.14</min_angle>
+                <max_angle>3.14</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <resolution>1</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.0</min>
+              <max>10.0</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+            <topicName>/scan</topicName>
+            <frameName>lidar_link</frameName>
+          </plugin>
+        </sensor>
+      </link>
+      <pose>0 0 1.5 0 0 0</pose> <!-- Position the LiDAR sensor in the middle of the room -->
     </model>
 
   </world>
