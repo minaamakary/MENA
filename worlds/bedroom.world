@@ -112,7 +112,7 @@
     <!-- Bed pushed back against the wall -->
     <include>
       <uri>model://bed</uri>
-      <pose>-1.25 -4.8 0.25 0 0 1.5708</pose> <!-- Position the bed against the wall and facing the TV -->
+      <pose>--1.874219 -3.557249 0.250000 0 0 1.570799</pose> <!-- Position the bed against the wall and facing the TV -->
     </include>
 
     <!-- Nightstand beside the bed -->
@@ -138,7 +138,7 @@
           </material>
         </visual>
       </link>
-      <pose>-2.75 -4.8 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
+      <pose>-3.75 -4.6 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
     </model>
 
     <!-- Lamp on the nightstand -->
@@ -166,7 +166,7 @@
           </material>
         </visual>
       </link>
-      <pose>-2.75 -4.8 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
+      <pose>-3.75 -4.6 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
     </model>
 
     <!-- Rug covering the whole floor -->
@@ -326,7 +326,7 @@
             <diffuse>0.1 0.1 0.1 1</diffuse>
           </material>
         </visual>
-        <pose>0 2 0.85 0 0 0</pose> <!-- Position the TV just above the bench -->
+        <pose>0 2 0.75 0 0 0</pose> <!-- Position the TV just above the bench -->
       </link>
     </model>
 
@@ -353,7 +353,7 @@
           </material>
         </visual>
       </link>
-      <pose>0.75 2 0.25 0 0 0</pose> <!-- Position the sound system next to the TV -->
+      <pose>1 2 0.25 0 0 0</pose> <!-- Position the sound system next to the TV -->
     </model>
 
   </world>
