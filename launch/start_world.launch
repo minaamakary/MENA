@@ -1,6 +1,10 @@
 <launch>
-  <arg name="world_name" default="$(find thesis)/worlds/bedroom.world"/>
+  <!-- Launch Gazebo world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="world_name" value="$(find thesis)/worlds/roomliving.world"/>
   </include>
+
+  <!-- Run the point cloud processing node -->
+  <node pkg="thesis" type="lidar3Dwall_measurement.py" name="lidar3Dwall_measurement_node" output="screen"/>
 </launch>
+
