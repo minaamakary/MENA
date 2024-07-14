@@ -10,7 +10,7 @@ class WallMeasurement:
         rospy.init_node('wall_measurement_node', anonymous=True)
         self.point_cloud_sub = rospy.Subscriber('/velodyne_points', PointCloud2, self.point_cloud_callback)
         self.point_cloud_data = None
-        rospy.loginfo("WallMeasurement node initialized and subscribed to /velodyne_points")
+        rospy.loginfo("Wall Measurement node initialized and subscribed to /velodyne_points")
 
     def point_cloud_callback(self, data):
         rospy.loginfo("Point cloud data received")
