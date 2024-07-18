@@ -3,6 +3,7 @@
 import rospy
 from sensor_msgs.msg import LaserScan
 import numpy as np
+from std_msgs.msg import Float32MultiArray
 
 def calculate_wall_dimensions(ranges, angle_min, angle_increment):
     rospy.loginfo("Calculating wall dimensions")
@@ -24,6 +25,11 @@ def calculate_wall_dimensions(ranges, angle_min, angle_increment):
     width = max(x_coords) - min(x_coords)
     height = max(z_coords) - min(z_coords)
 
+    # Publish wall dimensions
+    if width is not None and height is not None:
+        dimensions = Float32MultiArray(data=[width, height])
+        wall_dimensions_pub.publish(dimensions)
+
     rospy.loginfo(f"Estimated Wall Width: {width} meters")
     rospy.loginfo(f"Estimated Wall Height: {height} meters")
 
@@ -36,7 +42,11 @@ def main():
     rospy.init_node('wall_measurement_node', anonymous=True)
     rospy.Subscriber('/velodyne_points', LaserScan, laser_scan_callback)
     rospy.loginfo("Wall Measurement node initialized and subscribed to /velodyne_points")
-   
+    
+    global wall_dimensions_pub
+    wall_dimensions_pub = rospy.Publisher('/wall_dimensions', Float32MultiArray, queue_size=10)
+
+
     try:
         rospy.spin()
     except rospy.ROSInterruptException:
