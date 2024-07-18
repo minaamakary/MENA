@@ -21,12 +21,14 @@ def resize_image(image_path, width, height, output_path):
     # Save the resized image to the specified output path
     cv2.imwrite(output_path, resized_image)
     rospy.loginfo(f"Resized image saved to {output_path}")
+    cv2.imshow(output_path, image)
+
 
 def wall_dimensions_callback(data):
     width, height = data.data
 
     # Define the path to your image and the output path
-    image_path = "/path/to/your/image.jpg"  # Update this path to your image file
+    image_path = "/home/minamakary/ros/catkin_ws/src/thesis/images/portrait_one.jpg"  # Update this path to your image file
     output_path = "resized_wall_image.jpg"
 
     # Resize the image based on the received wall dimensions
