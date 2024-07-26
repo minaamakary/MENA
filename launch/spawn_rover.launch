@@ -1,0 +1,12 @@
+<launch>
+  <!-- Load the rover description -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find thesis)/urdf/rover.urdf.xacro'" />
+
+  <!-- Spawn the robot in Gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model rover -x 1 -y 2 -z 0"/>
+
+  <!-- Launch teleop node -->
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen">
+      <param name="cmd_vel" value="/cmd_vel" />
+  </node>
+</launch>
