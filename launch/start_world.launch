@@ -5,6 +5,7 @@
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
    <include file="$(find gazebo_ros)/launch/gazebo.launch" pass_all_args="true"/>
     <arg name="world_name" value="$(find thesis)/worlds/roomliving.world"/>
+    
   </include>
   <arg name="gazebo_gui" default="true" doc="Start Gazebo GUI"/>
   <arg name="paused" default="false" doc="Start Gazebo paused"/>
