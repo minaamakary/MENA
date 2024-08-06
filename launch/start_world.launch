@@ -1,10 +1,11 @@
-
+ 
 <launch>
+
   <!-- Launch Gazebo world -->
   <param name="use_sim_time" value="true" />
-  <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-   <include file="$(find gazebo_ros)/launch/gazebo.launch" pass_all_args="true"/>
-    <arg name="world_name" value="$(find thesis)/worlds/roomliving.world"/>
+<!--  <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+  <!--- <include file="$(find gazebo_ros)/launch/gazebo.launch" pass_all_args="true"/> -->
+  <arg name="world_name" value="$(find thesis)/worlds/roomliving.world"/>
     
   </include>
   <arg name="gazebo_gui" default="true" doc="Start Gazebo GUI"/>
@@ -13,30 +14,27 @@
   <arg name="world_pose" default="-x 1 -y 0 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
 
  <!-- MoveIt options -->
-  <arg name="pipeline" default="ompl" doc="Planning pipeline to use with MoveIt"/>
+ <!--- <arg name="pipeline" default="ompl" doc="Planning pipeline to use with MoveIt"/> -->
  <include file="$(find mecademic_moveit_config)/launch/demo.launch" pass_all_args="true">
     <!-- robot_description is loaded by gazebo.launch, to enable Gazebo features -->
     <arg name="load_robot_description" value="false" />
     <arg name="moveit_controller_manager" value="ros_control" />
   </include>
+
+   <!-- Start robot_state_publisher to publish the transforms -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" />
+
   <!-- Load the robot description and Spawn the robot in Gazebo --> 
   <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find mecademic_description)/urdf/meca_500_r3.urdf.xacro'" /> -->
   <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model meca_500_r3 -x 0 -y 0 -z 2"/> -->
   
   <!-- Run the point cloud processing node -->
   <node pkg="thesis" type="lidar3Dwall_measurement.py" name="lidar3Dwall_measurement_node" output="screen"/>
- 
-
- <!-- Load the rover description -->
-    <param name="robot_description" command="$(find xacro)/xacro '$(find thesis)/urdf/rover.urdf.xacro'" />
-
-    <!-- Spawn the robot in Gazebo -->
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model rover -x 1 -y 2 -z 0"/>
 
     <!-- Launch teleop node -->
-    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen">
-        <param name="cmd_vel" value="/cmd_vel" />
-    </node>
+    <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"> -->
+     <!--   <param name="cmd_vel" value="/cmd_vel" /> -->
+   <!--  </node> -->
 
 
 </launch>

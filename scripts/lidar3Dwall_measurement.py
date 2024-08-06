@@ -1,25 +1,29 @@
 #!/usr/bin/env python
 
 import rospy
-from sensor_msgs.msg import LaserScan
+import sensor_msgs.point_cloud2 as pc2
+from sensor_msgs.msg import PointCloud2
 import numpy as np
 from std_msgs.msg import Float32MultiArray
 
-def calculate_wall_dimensions(ranges, angle_min, angle_increment):
+last_processed_time = None
+
+def calculate_wall_dimensions(points):
     rospy.loginfo("Calculating wall dimensions")
 
-    # Convert laser scan ranges to Cartesian coordinates
-    angles = np.arange(angle_min, angle_min + len(ranges) * angle_increment, angle_increment)
-    x_coords = ranges * np.cos(angles)
-    z_coords = ranges * np.sin(angles)  # Assuming 2D LiDAR in x-z plane
+    # Convert point cloud to numpy arrays
+    x_coords = []
+    z_coords = []
 
-    # Filter out infinite and invalid readings
-    valid_indices = np.isfinite(x_coords) & np.isfinite(z_coords)
-    x_coords = x_coords[valid_indices]
-    z_coords = z_coords[valid_indices]
+    for p in points:
+        x_coords.append(p[0])
+        z_coords.append(p[2])  # Assuming 2D LiDAR in x-z plane
+
+    x_coords = np.array(x_coords)
+    z_coords = np.array(z_coords)
 
     if len(x_coords) == 0 or len(z_coords) == 0:
-        rospy.loginfo("No valid points found in the laser scan data")
+        rospy.loginfo("No valid points found in the point cloud data")
         return
 
     width = max(x_coords) - min(x_coords)
@@ -33,19 +37,23 @@ def calculate_wall_dimensions(ranges, angle_min, angle_increment):
     rospy.loginfo(f"Estimated Wall Width: {width} meters")
     rospy.loginfo(f"Estimated Wall Height: {height} meters")
 
-def laser_scan_callback(data):
-    rospy.loginfo("Laser scan data received")
-    ranges = np.array(data.ranges)
-    calculate_wall_dimensions(ranges, data.angle_min, data.angle_increment)
+def point_cloud_callback(data):
+    global last_processed_time
+    current_time = rospy.get_time()
+    
+    if last_processed_time is None or (current_time - last_processed_time) >= 0.5:
+        rospy.loginfo("Point cloud data received")
+        points = pc2.read_points(data, field_names=("x", "y", "z"), skip_nans=True)
+        calculate_wall_dimensions(points)
+        last_processed_time = current_time
 
 def main():
     rospy.init_node('wall_measurement_node', anonymous=True)
-    rospy.Subscriber('/velodyne_points', LaserScan, laser_scan_callback)
+    rospy.Subscriber('/velodyne_points', PointCloud2, point_cloud_callback)
     rospy.loginfo("Wall Measurement node initialized and subscribed to /velodyne_points")
     
     global wall_dimensions_pub
     wall_dimensions_pub = rospy.Publisher('/wall_dimensions', Float32MultiArray, queue_size=10)
-
 
     try:
         rospy.spin()
