@@ -1,0 +1,93 @@
+#!/usr/bin/env python
+import rospy
+import sensor_msgs.point_cloud2 as pc2
+from sensor_msgs.msg import PointCloud2
+import numpy as np
+import open3d as o3d
+import threading
+import time
+
+
+
+point_cloud_data = []  # Global list to store point cloud data for visualization
+
+def point_cloud_callback(data):
+    global point_cloud_data
+    
+    # Read points from the PointCloud2 message
+    gen = pc2.read_points(data, field_names=("x", "y", "z"), skip_nans=True)
+    points = []
+    
+    for point in gen:
+        x, y, z = point
+        
+        # Apply scaling to ensure points are visible
+        scale_factor = 1.0  # Adjust this scale factor if necessary
+        x, y, z = x * scale_factor, y * scale_factor, z * scale_factor
+        
+        # Filter points within a reasonable range
+        if 0.1 < np.sqrt(x**2 + y**2 + z**2) < 10.0:
+            points.append([x, y, z])
+
+    # Update the global point cloud data
+    if points:
+        point_cloud_data = points
+        rospy.loginfo(f"Point cloud updated with {len(points)} points.")
+        
+        # Save to a file for inspection
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(np.array(point_cloud_data))
+        o3d.io.write_point_cloud("/tmp/point_cloud.pcd", pcd)
+        rospy.loginfo("Point cloud saved to /tmp/point_cloud.pcd")
+    else:
+        rospy.loginfo("No valid points in this frame.")
+
+def visualize_point_cloud():
+    vis = o3d.visualization.Visualizer()
+    vis.create_window()
+    pcd = o3d.geometry.PointCloud()
+
+    vis.add_geometry(pcd)  # Add the geometry to the visualizer initially
+
+    # Set initial view control parameters
+    view_ctl = vis.get_view_control()
+    view_ctl.set_front([0.0, 0.0, -1.0])  # Look along the Z-axis
+    view_ctl.set_up([0.0, -1.0, 0.0])  # Y-axis points down
+    view_ctl.set_lookat([0.0, 0.0, 0.0])  # Center at the origin
+    view_ctl.set_zoom(0.5)  # Zoom out
+
+    while not rospy.is_shutdown():
+        if point_cloud_data:
+            # Update the point cloud data
+            pcd.points = o3d.utility.Vector3dVector(np.array(point_cloud_data))
+
+            # Update the geometry in the visualizer
+            vis.update_geometry(pcd)
+
+            # Adjust point size
+            opt = vis.get_render_option()
+            opt.point_size = 2.0
+            opt.background_color = np.asarray([0, 0, 0])  # Set background to black
+
+            vis.poll_events()
+            vis.update_renderer()
+        
+        time.sleep(0.1)  # Control the update rate
+
+    vis.destroy_window()
+
+
+
+
+def main():
+    rospy.init_node('point_cloud_visualizer', anonymous=False)  # Initialize the node
+    rospy.Subscriber('/velodyne_points', PointCloud2, point_cloud_callback)  # Subscribe to the PointCloud2 topic
+
+    # Start the visualization in a separate thread
+    vis_thread = threading.Thread(target=visualize_point_cloud)
+    vis_thread.start()
+
+    rospy.spin()  # Keep the node running
+
+if __name__ == '__main__':
+    main()

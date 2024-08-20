@@ -68,14 +68,14 @@
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.1 6 2.5</size>
+              <size>0.1 10 2.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.1 6 2.5</size>
+              <size>0.1 10 2.5</size>
             </box>
           </geometry>
           <material>
@@ -138,114 +138,7 @@
       </link>
       <pose>-3.75 -4.8 0.25 0 0 0</pose> <!-- Position the nightstand beside the bed -->
     </model>
-
-    <!-- Lamp on the nightstand -->
-    <model name="lamp">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <cylinder>
-              <radius>0.1</radius>
-              <length>0.3</length>
-            </cylinder>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <cylinder>
-              <radius>0.1</radius>
-              <length>0.3</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-          </material>
-        </visual>
-      </link>
-      <pose>-3.75 -4.8 0.55 0 0 0</pose> <!-- Position the lamp on the nightstand -->
-    </model>
-
-    <!-- Rug covering the whole floor -->
-    <model name="rug">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>10 10 0.01</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>10 10 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.8 0.7 0.6 1</ambient>
-            <diffuse>0.8 0.7 0.6 1</diffuse>
-          </material>
-        </visual>
-      </link>
-      <pose>0 0 0 0 0 0</pose> <!-- Position the rug covering the whole floor -->
-    </model>
-
-    <!-- Bookshelf -->
-    <model name="bookshelf">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>1 0.3 2</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>1 0.3 2</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.4 0.2 0.1 1</ambient>
-            <diffuse>0.4 0.2 0.1 1</diffuse>
-          </material>
-        </visual>
-      </link>
-      <pose>4 4 1 0 0 0</pose> <!-- Position the bookshelf in the corner -->
-    </model>
-
-    <!-- Wardrobe -->
-    <model name="wardrobe">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>1.5 0.6 2</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>1.5 0.6 2</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.6 0.4 0.2 1</ambient>
-            <diffuse>0.6 0.4 0.2 1</diffuse>
-          </material>
-        </visual>
-      </link>
-      <pose>-4 4 1 0 0 0</pose> <!-- Position the wardrobe in the corner -->
-    </model>
-
-
+  
 
   </world>
 </sdf>
