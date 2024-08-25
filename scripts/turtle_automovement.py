@@ -86,7 +86,7 @@ def obstacleavoid(distance, move):
 
 
     else:
-        move.linear.x = 0.2
+        move.linear.x = 0.35
         move.angular.z = 0.0    
         pub.publish(move)
 
