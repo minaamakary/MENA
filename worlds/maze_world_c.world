@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="maze_world_c">
+    <model name="maze_c">
+      <static>true</static>
+
+      <!-- Floor -->
+      <link name="floor">
+        <collision name="floor_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="floor_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Walls -->
+      <link name="walls">
+        <!-- Outer Walls -->
+        <collision name="north_wall_collision">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 10 1.25 0 0 0</pose>
+        </collision>
+        <visual name="north_wall_visual">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 10 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="south_wall_collision">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -10 1.25 0 0 0</pose>
+        </collision>
+        <visual name="south_wall_visual">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -10 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="east_wall_collision">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>10 0 1.25 0 0 0</pose>
+        </collision>
+        <visual name="east_wall_visual">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>10 0 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="west_wall_collision">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>-10 0 1.25 0 0 0</pose>
+        </collision>
+        <visual name="west_wall_visual">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>-10 0 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <!-- Internal Walls -->
+        <!-- Vertical Walls -->
+        
+        <!-- Horizontal Walls -->
+        <collision name="wall3_collision">
+          <geometry>
+            <box>
+              <size>14 0.07 2.5</size>
+            </box>
+          </geometry>
+          <pose>7 6.5 2.25 0 0 0</pose>
+        </collision>
+        <visual name="wall3_visual">
+          <geometry>
+            <box>
+              <size>14 0.07 2.5</size>
+            </box>
+          </geometry>
+          <pose>7 6.5 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+          </material>
+        </visual>
+
+
+        <!-- Additional Walls to Create a Labyrinth -->
+
+
+        <!-- Closing Walls -->
+        
+      </link>
+    </model>
+  </world>
+</sdf>

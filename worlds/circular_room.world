@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="circular_room_world">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <model name="circular_room">
+      <static>true</static>
+
+      <!-- Floor -->
+      <link name="floor">
+        <collision name="floor_collision">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>0.1</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="floor_visual">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>0.1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Walls -->
+      <link name="walls">
+        <pose>0 0 1.25 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>2.5</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_without_contact>true</collide_without_contact>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>5</radius>
+              <length>2.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Inner space (to make it hollow) -->
+      <link name="inner_space">
+        <pose>0 0 1.25 0 0 0</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>4.9</radius>
+              <length>2.6</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_without_contact>true</collide_without_contact>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>4.9</radius>
+              <length>2.6</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>1 1 1 0</ambient>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

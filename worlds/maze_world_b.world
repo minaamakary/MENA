@@ -1,0 +1,246 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="maze_world_b">
+    <model name="maze_b">
+      <static>true</static>
+
+      <!-- Floor -->
+      <link name="floor">
+        <collision name="floor_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="floor_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 20</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+
+      <!-- Walls -->
+      <link name="walls">
+        <!-- Outer Walls -->
+        <collision name="north_wall_collision">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 10 1.25 0 0 0</pose>
+        </collision>
+        <visual name="north_wall_visual">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 10 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="south_wall_collision">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -10 1.25 0 0 0</pose>
+        </collision>
+        <visual name="south_wall_visual">
+          <geometry>
+            <box>
+              <size>20 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -10 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="east_wall_collision">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>10 0 1.25 0 0 0</pose>
+        </collision>
+        <visual name="east_wall_visual">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>10 0 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="west_wall_collision">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>-10 0 1.25 0 0 0</pose>
+        </collision>
+        <visual name="west_wall_visual">
+          <geometry>
+            <box>
+              <size>0.2 20 2.5</size>
+            </box>
+          </geometry>
+          <pose>-10 0 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+          </material>
+        </visual>
+
+        <!-- Internal Walls -->
+        <!-- Vertical Wall -->
+        <collision name="wall1_collision">
+          <geometry>
+            <box>
+              <size>0.2 15 2.5</size>
+            </box>
+          </geometry>
+          <pose>3 0 1.25 0 0 0</pose>
+        </collision>
+        <visual name="wall1_visual">
+          <geometry>
+            <box>
+              <size>0.2 15 2.5</size>
+            </box>
+          </geometry>
+          <pose>3 0 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+        <!-- Horizontal Walls Creating Dead Ends -->
+        <collision name="wall2_collision">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -3 1.25 0 0 0</pose>
+        </collision>
+        <visual name="wall2_visual">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>0 -3 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+        <collision name="wall3_collision">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>6 3 1.25 0 0 0</pose>
+        </collision>
+        <visual name="wall3_visual">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>6 3 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+        <!-- More Walls to Increase Complexity -->
+        <collision name="wall4_collision">
+          <geometry>
+            <box>
+              <size>0.2 6 2.5</size>
+            </box>
+          </geometry>
+          <pose>-3 5 1.25 0 0 0</pose>
+        </collision>
+        <visual name="wall4_visual">
+          <geometry>
+            <box>
+              <size>0.2 6 2.5</size>
+            </box>
+          </geometry>
+          <pose>-3 5 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+        <!-- Closing Walls -->
+        <!-- Entry Closing Wall -->
+        <collision name="entry_closing_wall_collision">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>-7 -7 1.25 0 0 0</pose>
+        </collision>
+        <visual name="entry_closing_wall_visual">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>-7 -7 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+        <!-- Exit Closing Wall -->
+        <collision name="exit_closing_wall_collision">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>7 7 1.25 0 0 0</pose>
+        </collision>
+        <visual name="exit_closing_wall_visual">
+          <geometry>
+            <box>
+              <size>6 0.2 2.5</size>
+            </box>
+          </geometry>
+          <pose>7 7 1.25 0 0 0</pose>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+          </material>
+        </visual>
+
+      </link>
+    </model>
+  </world>
+</sdf>
