@@ -5,7 +5,7 @@
   <arg name="z_pos" default="0.0"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="/home/minamakary/ros/catkin_ws/src/thesis/worlds/compartments_final.world"/>
+    <arg name="world_name" value="/home/minamakary/ros/catkin_ws/src/thesis/worlds/roomliving.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -28,9 +28,9 @@
   <!-- Launch the nodes (movement and mapping) -->
   <!-- <node pkg="thesis" type="publish_pcd.py" name="pcd_publisher" output="screen"/> -->
    <node pkg="thesis" type="turtle_move_laserscan.py" name="turtle_move" output="screen"/>
-   <node pkg="thesis" type="pose_orientation_node.py" name="pose_orientation" output="screen"/>
-   <node pkg="thesis" type="distance_measurement_node.py" name="distance_measurement" output="screen"/>
-   <node pkg="thesis" type="mappingRoom.py" name="mapping_room" output="screen"/> 
+   <node pkg="thesis" type="pose_orientation_node.py" name="pose_orientation" output="screen"/> 
+   <node pkg="thesis" type="distance_measurement_node.py" name="distance_measurement" output="screen"/> 
+   <!-- <node pkg="thesis" type="mappingRoom.py" name="mapping_room" output="screen"/> -->
 
 
   <!-- Launch RViz -->

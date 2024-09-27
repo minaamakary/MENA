@@ -10,7 +10,7 @@ from tf.transformations import euler_matrix, quaternion_matrix
 from threading import Thread, Lock
 import os
 import sensor_msgs.point_cloud2 as pc2
-
+import time  # Ensure time is imported
 
 global point_cloud, robot_pose, robot_yaw, pcd_lock
 point_cloud = o3d.geometry.PointCloud()
@@ -66,24 +66,29 @@ def transform_point(point, pose, yaw):
         return None
 
 def visualize_point_cloud():
-    global point_cloud
+    global point_cloud, pcd_lock
     vis = o3d.visualization.Visualizer()
     vis.create_window(window_name="Real-Time PCD Visualization", width=1800, height=1800)
     is_added = False
+    pcd_vis = o3d.geometry.PointCloud()
 
     while not rospy.is_shutdown():
         with pcd_lock:
             if not point_cloud.has_points():
                 continue  
 
-            if not is_added:
-                vis.add_geometry(point_cloud)
-                is_added = True
-            else:
-                vis.update_geometry(point_cloud)
+            # Copy the point cloud data safely
+            pcd_vis.points = o3d.utility.Vector3dVector(np.asarray(point_cloud.points))
+
+        if not is_added:
+            vis.add_geometry(pcd_vis)
+            is_added = True
+        else:
+            vis.update_geometry(pcd_vis)
 
         vis.poll_events()
         vis.update_renderer()
+        time.sleep(0.01)  # Optional: Add a small sleep to improve responsiveness
 
     vis.destroy_window()
 
