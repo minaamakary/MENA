@@ -13,7 +13,7 @@
     <arg name="debug" value="false"/>
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find thesis)/urdf/turtlebot3_$(arg model).urdf.xacro" />
 
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
   
@@ -27,11 +27,11 @@
  
   <!-- Launch the nodes (movement and mapping) -->
   <!-- <node pkg="thesis" type="publish_pcd.py" name="pcd_publisher" output="screen"/> -->
-   <!--<node pkg="thesis" type="turtle_move_laserscan.py" name="turtle_move" output="screen"/> -->
+   <node pkg="thesis" type="turtle_move_laserscan.py" name="turtle_move" output="screen"/>
    <node pkg="thesis" type="pose_orientation_node.py" name="pose_orientation" output="screen"/>
    <node pkg="thesis" type="distance_measurement_node.py" name="distance_measurement" output="screen"/>
-  <!-- <node pkg="thesis" type="mappingRoom.py" name="mapping_room" output="screen"/> -->
-  <!-- <node pkg="thesis" type="pcdAnalyser.py" name="analyse_pcd" output="screen"/> -->
+   <node pkg="thesis" type="mappingRoom.py" name="mapping_room" output="screen"/> 
+
 
   <!-- Launch RViz -->
  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find thesis)/rviz/pointcloud_mapping.rviz"/> -->
