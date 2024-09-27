@@ -67,10 +67,10 @@ include_directories(
 #############
 
 # All install targets should use catkin DESTINATION variables
-catkin_install_python(PROGRAMS
-  scripts/lidarProcessingNode.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+#catkin_install_python(PROGRAMS
+  #scripts/lidarProcessingNode.py
+ # DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#)
 
 ## Mark executables for installation
 # install(TARGETS ${PROJECT_NAME}_node
