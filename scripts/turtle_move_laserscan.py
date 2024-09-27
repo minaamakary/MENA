@@ -65,52 +65,6 @@ def scan_callback(data):
 		turn_anticlockwise(pub,move)
 		move_forward(pub, move)
 
-"""
-def print_robot_pose(data):
-    robot_name = "turtlebot3_waffle"
-    try:
-        index = data.name.index(robot_name)
-        position = data.pose[index].position
-        orientation = data.pose[index].orientation
-		
-        #print(f"Position: x={position.x}, y={position.y}, z={position.z}")
-        #print(f"Orientation: x={orientation.x}, y={orientation.y}, z={orientation.z}, w={orientation.w}")
-    except ValueError:
-        print(f"Robot {robot_name} not found in the model states")
-
-def calculate_wall_dimensions(data):
-    wall_dimensions_pub = rospy.Publisher('/wall_dimensions', Float32MultiArray, queue_size=10)
-    #rospy.loginfo("Calculating wall dimensions")
-	
-    points = list(pc2.read_points(data, skip_nans=True, field_names=("x", "y", "z")))
-
-    # Convert point cloud to numpy arrays
-    x_coords = []
-    z_coords = []
-
-    for p in points:
-        x_coords.append(p[0])
-        z_coords.append(p[2])  # Assuming 2D LiDAR in x-z plane
-
-    x_coords = np.array(x_coords)
-    z_coords = np.array(z_coords)
-
-    if len(x_coords) == 0 or len(z_coords) == 0:
-        rospy.loginfo("No valid points found in the point cloud data")
-        return
-
-    width = max(x_coords) - min(x_coords)
-    height = max(z_coords) - min(z_coords)
-    #draw(height,width)
-	# Publish wall dimensions
-    if width is not None and height is not None:
-        dimensions = Float32MultiArray(data=[width, height])
-        wall_dimensions_pub.publish(dimensions)
-
-    #rospy.loginfo(f"Estimated Wall Width: {width} meters")
-    #rospy.loginfo(f"Estimated Wall Height: {height} meters")
-"""
-
 def main ():
 	#image = cv.imread('image.jpg', cv.IMREAD_GRAYSCALE)
 	rospy.init_node('wall_follower', anonymous=False)
