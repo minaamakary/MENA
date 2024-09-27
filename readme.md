@@ -1,4 +1,6 @@
-Welcome to my readme file!
+Welcome to my package readme file!
+
+*********************************************************************************************************
 
 Just to make this easy. 
 
@@ -17,6 +19,9 @@ https://github.com/ROBOTIS-GIT/turtlebot3_msgs
 **turtlebot3_waffle.gazebo.xacro**
 **turtlebot3_waflle.urdf.xacro**
 **common_properties.xacro** (this file was not changed but was moved from the original robotis package - again please delete it to avoid duplications)
+
+
+************************************************************************************************************
 
 
 To run the project successfully all you need to do is 
@@ -38,4 +43,12 @@ If you need to display only navigation you can comment out the rest of the scrip
 **But for mapping you need all of them to be running.**
 
 
+*****************************************************************************************************************
+
+
+There are different worlds for testing purposes inside the worlds folder. If you need to use a different one than the one configured, modify it in the launch file turtlebot3_empty_world.launch
+
+
+
 Thats all, thanks for reading!
+
