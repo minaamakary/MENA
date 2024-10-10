@@ -5,7 +5,7 @@
   <arg name="z_pos" default="0.0"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="/home/minamakary/ros/catkin_ws/src/thesis/worlds/roomliving.world"/>
+    <arg name="world_name" value="/home/minamakary/ros/catkin_ws/src/thesis/worlds/outerwalls.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
